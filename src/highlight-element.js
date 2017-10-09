@@ -20,7 +20,7 @@ module.exports = function() {
     }
   }
 
-  this.highlightElement = (performHighlight, element, duration) => {
+  this.highlightElement = (element, duration) => {
     this.init();
     browser.wait(ExpectedConditions.elementToBeClickable(element), 10 * 1000);
     return element.getAttribute('style').then((originalStyle) => {

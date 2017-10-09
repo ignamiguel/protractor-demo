@@ -9,7 +9,7 @@ describe('"the-internet" Protractor DEMO', ()=> {
   it('should locate the square', () => {
     browser.get('http://localhost:9292/transition');
     // console.log(protractor.promise.USE_PROMISE_MANAGER);
-    // console.log(protractor.promise.USE_PROMISE_MANAGER);
+    console.log(protractor.promise.USE_PROMISE_MANAGER);
     browser.wait(EC.presenceOf(squareDiv));
     browser.sleep(5 * 1000);
     
