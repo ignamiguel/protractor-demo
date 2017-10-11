@@ -2,11 +2,15 @@
   "name": "protractor-demo",
   "version": "1.0.0",
   "description": "Demo project for Protractor framework",
+  "scripts": {
+    "pretest": "webdriver-manager update",
+    "test": "protractor config/protractor.config.js",
+    "prereport": "rm -rf allure-report",
+    "report": "allure generate allure-results -o allure-report && allure open allure-report",
+    "clean": "rm -rf allure-report allure-results"
+  },
   "main": "index.js",
   "directories": {
-    "test": "test"
-  },
-  "scripts": {
     "test": "test"
   },
   "repository": {
@@ -24,6 +28,7 @@
   },
   "homepage": "https://github.com/ignamiguel/protractor-demo#readme",
   "dependencies": {
+    "jasmine-allure-reporter": "^1.0.1",
     "protractor": "^5.1.2"
   },
   "devDependencies": {
