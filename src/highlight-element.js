@@ -1,4 +1,5 @@
 module.exports = function() {
+  const defaultTimeout = 10000;
   this.started = false;
 
   this.init = () =>  {
@@ -21,8 +22,11 @@ module.exports = function() {
   }
 
   this.highlightElement = (element, duration) => {
+    if(duration == null) {
+      duration = 2;
+    }
     this.init();
-    browser.wait(ExpectedConditions.elementToBeClickable(element), 10 * 1000);
+    browser.wait(ExpectedConditions.elementToBeClickable(element), this.defaultTimeout);
     return element.getAttribute('style').then((originalStyle) => {
       browser.executeScript('arguments[0].setAttribute(arguments[1], arguments[2])',
       element.getWebElement(),

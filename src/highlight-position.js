@@ -37,7 +37,7 @@ module.exports = function() {
     const left = point.slice(startingPoint + 2, endingPoint);
 
     // console.log(`top='${top}' left='${left}'`);
-    this.highlightPosition(top, left, 10);
+    this.highlightPosition(left, top, 10);
   }
 
   this.highlightPosition = (top, left, duration) => {

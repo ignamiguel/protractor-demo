@@ -4,7 +4,7 @@ exports.config = {
   multiCapabilities: [{ chromeOptions:
     { args: ['disable-infobars=true']},
       browserName: 'chrome'}],
-  specs: ['../test/temp/login.js'],
+  specs: ['../test/demo-1/login-ok.test.js'],
   onPrepare: function () {
     browser.ignoreSynchronization = true
   }

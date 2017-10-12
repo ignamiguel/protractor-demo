@@ -7,10 +7,10 @@ const headerLabel = element(by.css('[class="example"] h2'));
 const logoutButton = element(by.css('[class="button secondary radius"]'));
 const successLoginLabel = element(by.css('[class="flash success"]'));
 const timeout = 600 * 1000;
-const dreamTime = 3 * 1000;
+const dreamTime = 1 * 1000;
 const HighlightElement = require('../../src/highlight-element');
 const h = new HighlightElement();
-const duration = 3;
+const duration = 2;
 
 describe('"the-internet" Protractor DEMO', ()=> {
   it('should navigate to login page', () => {
@@ -41,8 +41,6 @@ describe('"the-internet" Protractor DEMO', ()=> {
 
     h.highlightElement(logoutButton, duration);
     logoutButton.click();
-
-    browser.sleep(dreamTime);
 
     h.highlightElement(headerLabel, duration);
     expect(headerLabel.getText()).toBe('Login Page');

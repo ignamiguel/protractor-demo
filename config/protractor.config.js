@@ -28,5 +28,6 @@ exports.config = {
    demo1: [
      '../test/demo-1/*.js'
    ]
- }
+ },
+//  SELENIUM_PROMISE_MANAGER: false
 };
