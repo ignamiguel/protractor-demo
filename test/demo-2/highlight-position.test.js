@@ -6,7 +6,7 @@ const wallyImg = element(by.id('image-wally'));
 const hp = new HighlightPosition();
 const he = new HighlightElement();
 const timeout = 600 * 1000;
-const dreamTime = 3 * 1000;
+const dreamTime = 1 * 1000;
 
 describe('"the-internet" Protractor DEMO', ()=> {
   it('should locate the square', () => {

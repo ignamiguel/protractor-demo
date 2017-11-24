@@ -42,15 +42,21 @@ module.exports = function() {
 
   this.highlightPosition = (top, left, duration) => {
     this.init();
-    const script = `var a = document.createElement("div");\
-    a.setAttribute("style",\
-    "top: ${top}px;left: ${left}px;color: #FFFF00; outline: 5px dashed #FFFF00;\
-    box-shadow: 0 0 0 5px #69D2E7; animation: 0.2s animateBorderOne ease infinite;\
-    z-index: 5000; position: absolute; width: 20px; height: 20px;");\
-    document.children[0].children[1].appendChild(a);
-    a.innerHTML = '<img id="image-w3css" src="https://cdn4.iconfinder.com/data/icons/dot/256/arrow_up_left_2.png"\
-    width="20px" height="20px">';
-    setTimeout(function(){ a.remove(); }, ${duration} * 1000);`;
+    const script = `var positionDiv = document.createElement("div");
+    positionDiv.setAttribute("style",
+    "top: ${top}px;left: ${left}px;color: #FFFF00; /*outline: 5px dashed #FFFF00;*/\
+    /*box-shadow: 0 0 0 5px #69D2E7*/; animation: 0.2s animateBorderOne ease infinite;\
+    z-index: 5000; position: absolute; width: 20px; height: 20px;");
+    positionDiv.innerHTML = '<div style="\
+    width: 0;\
+    height: 0;\
+    border-bottom: 16px solid springgreen;\
+    border-left: 8px solid transparent;\
+    border-right: 8px solid transparent;\
+    float: left;\
+    transform: rotate(-45deg);"></div>';
+    document.children[0].children[1].appendChild(positionDiv);
+    setTimeout(function(){ positionDiv.remove(); }, ${duration} * 1000);`;
     browser.executeScript(script);
     return browser.sleep(duration * 1000);
   }
