@@ -22,6 +22,7 @@ exports.config = {
     }));
   },
   jasmineNodeOpts: {
+    defaultTimeoutInterval: 123000,
     print: function() {}
  },
  suites: {
