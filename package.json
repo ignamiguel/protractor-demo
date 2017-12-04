@@ -29,7 +29,9 @@
   "homepage": "https://github.com/ignamiguel/protractor-demo#readme",
   "dependencies": {
     "jasmine-allure-reporter": "^1.0.1",
-    "protractor": "^5.1.2"
+    "protractor": "^5.1.2",
+    "sauce-connect-launcher": "^1.2.3",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "jasmine-spec-reporter": "^4.2.1"
