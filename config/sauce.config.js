@@ -1,14 +1,16 @@
 const sauceConnectLauncher = require('sauce-connect-launcher');
-const tunnelName = require('uuid/v1');
+const uuidv1 = require('uuid/v1');
+const tunnelName = uuidv1();
+
+// For testing in Saucelabs without tunnels
+// specs: ['../test/saucelabs/*.js'],
+
+// For testing in Saucelabs with tunnels
 
 exports.config = {
   sauceUser: process.env.SAUCE_USERNAME,
   sauceKey: process.env.SAUCE_ACCESS_KEY,
 
-  // For testing in Saucelabs without tunnels
-  // specs: ['../test/saucelabs/*.js'],
-
-  // For testing in Saucelabs with tunnels
   suites: {
     demo1: [
       '../test/demo-1/*.js'
@@ -16,6 +18,7 @@ exports.config = {
   },
 
   beforeLaunch: () => {
+    console.log(tunnelName);
     return new Promise((resolve, reject) => {
       sauceConnectLauncher({
         username: process.env.SAUCE_USERNAME,
