@@ -1,7 +1,12 @@
 const sauceConnectLauncher = require('sauce-connect-launcher');
 const uuidv1 = require('uuid/v1');
-const tunnelName = uuidv1();
+const tunnelName = uuidv1().substring(1, 10);
+let sauceConnectProcess;
 
+const setSCProcess = (process) => {
+    console.log('SET SC PROCESS');
+    sauceConnectProcess = process;
+};
 // For testing in Saucelabs without tunnels
 // specs: ['../test/saucelabs/*.js'],
 
@@ -13,46 +18,50 @@ exports.config = {
 
   suites: {
     demo1: [
-      '../test/demo-1/*.js'
+      '../test/demo-1/login-ok.test.js'
     ]
   },
 
   beforeLaunch: () => {
-    console.log(tunnelName);
-    return new Promise((resolve, reject) => {
-      sauceConnectLauncher({
-        username: process.env.SAUCE_USERNAME,
-        accessKey: process.env.SAUCE_ACCESS_KEY,
-        tunnelIdentifier: tunnelName,
-        verbose: true,
-        verboseDebugging: true,
-        connectRetries: 3,
-        connectRetryTimeout: 60000
-      }, (err, tunnel) => {
-        if (err) {
-          console.error('ERROR WHEN OPENING SAUCELABS TUNNEL:', err);
-          reject(err);
-
-          return;
-        }
-        console.log('OPENING SAUCELABS TUNNEL OK');
-        sauceConnectProcess = tunnel;
-        resolve();
-      });
-    });
+    // console.log('TUNNEL ID: ', tunnelName);
+    // return new Promise((resolve, reject) => {
+    //   sauceConnectLauncher({
+    //     username: process.env.SAUCE_USERNAME,
+    //     accessKey: process.env.SAUCE_ACCESS_KEY,
+    //     // tunnelIdentifier: tunnelName,
+    //     verbose: true,
+    //     verboseDebugging: true,
+    //     logger: console.log,
+    //     connectRetries: 3,
+    //     connectRetryTimeout: 60000
+    //   }, (err, tunnel) => {
+    //     if (err) {
+    //       console.error('ERROR WHEN OPENING SAUCELABS TUNNEL:', err);
+    //       reject(err);
+    //     }
+    //     console.log('OPENING SAUCELABS TUNNEL OK');
+    //     console.log('tunnel', tunnel);
+    //     if(tunnel != undefined) {
+    //       tunnel.close(() => {
+    //         console.log('Closed Sauce Connect process');
+    //       });
+    //     }
+    //     resolve();
+    //   });
+    // });
   },
 
-  onCleanup: () => {
-    if (process.env.SAUCE) {
-      return new Promise((resolve) => {
-        sauceConnectProcess.close(() => {
-          console.log('Closed Sauce Connect process');
-        });
+  onCleanUp: () => {
+    return new Promise((resolve, reject) => {
+        // console.log('CLEAN UP');
+        // console.log(sauceConnectProcess);
+        // if(sauceConnectProcess != undefined) {
+        //   sauceConnectProcess.close(() => {
+        //     console.log('Closed Sauce Connect process');
+        //   });
+        // }
         resolve();
-      });
-    }
-
-    return Promise.resolve();
+    });
   },
 
   onPrepare: function () {
@@ -77,11 +86,11 @@ exports.config = {
   }],
 
   onComplete: function () {
-      var printSessionId = function (jobName) {
-          browser.getSession().then(function (session) {
-              console.log('SauceOnDemandSessionID=' + session.getId() + ' job-name=' + jobName);
-          });
-      }
-      printSessionId("Insert Job Name Here");
+    //   var printSessionId = function (jobName) {
+    //       browser.getSession().then(function (session) {
+    //           console.log('SauceOnDemandSessionID=' + session.getId() + ' job-name=' + jobName);
+    //       });
+    //   }
+    //   printSessionId("Insert Job Name Here");
   }
 }
