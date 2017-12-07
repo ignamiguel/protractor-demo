@@ -1,10 +1,9 @@
+const { spawnSync } = require('child_process');
+const argv = require('yargs').argv;
 const sauceConnectLauncher = require('sauce-connect-launcher');
 const uuidv1 = require('uuid/v1');
 const tunnelName = uuidv1().substring(1, 10);
 let sauceConnectProcess;
-
-const argv = require('yargs').argv;
-const { spawnSync } = require('child_process');
 
 const setUp = async () => {
   return new Promise((resolve, reject) => {
@@ -23,7 +22,7 @@ const setUp = async () => {
         console.error('ERROR WHEN OPENING SAUCELABS TUNNEL:', err);
         reject(err);
       }
-      console.log('OPENING SAUCELABS TUNNEL OK');
+      console.log('SAUCELABS TUNNEL OPENED OK');
       resolve(tunnel);
     });
   });
