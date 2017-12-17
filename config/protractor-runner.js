@@ -1,9 +1,14 @@
+var clc = require('cli-color');
 const { spawnSync } = require('child_process');
 const argv = require('yargs').argv;
 const sauceConnectLauncher = require('sauce-connect-launcher');
 const uuidv1 = require('uuid/v1');
 const tunnelName = uuidv1().substring(1, 10);
 let sauceConnectProcess;
+
+const logOk = (message) => {
+  return console.log(clc.green(message));  
+};
 
 const setUp = async () => {
   return new Promise((resolve, reject) => {
@@ -22,7 +27,7 @@ const setUp = async () => {
         console.error('ERROR WHEN OPENING SAUCELABS TUNNEL:', err);
         reject(err);
       }
-      console.log('SAUCELABS TUNNEL OPENED OK');
+      logOk('SAUCELABS TUNNEL OPENED OK');
       resolve(tunnel);
     });
   });
@@ -49,7 +54,7 @@ const cleanUp = async () => {
   return new Promise((resolve) => {
     if(sauceConnectProcess != undefined) {
       sauceConnectProcess.close(() => {
-        console.log('SAUCELABS TUNNEL CLOSED OK');
+        logOk('SAUCELABS TUNNEL CLOSED OK');
       });
     }
     resolve();

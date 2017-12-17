@@ -1,3 +1,4 @@
+let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 const sauceConnectLauncher = require('sauce-connect-launcher');
 const uuidv1 = require('uuid/v1');
 const tunnelName = uuidv1().substring(1, 10);
@@ -66,8 +67,17 @@ exports.config = {
 
   onPrepare: function () {
       var caps = browser.getCapabilities();
-      browser.ignoreSynchronization = true
+      browser.ignoreSynchronization = true,
+      jasmine.getEnv().addReporter(new SpecReporter({
+        spec: {
+          displayStacktrace: true
+        }
+      }));
   },
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 123000,
+    print: function() {}
+ },
 
   multiCapabilities: [{
       browserName: 'firefox',
@@ -83,6 +93,13 @@ exports.config = {
       name: "chrome-tests",
       shardTestFiles: true,
       maxInstances: 25
+  },{
+    browserName: 'internet explorer',
+    version: '11.0',
+    platform: 'Windows 7',
+    name: "ie-tests",
+    shardTestFiles: true,
+    maxInstances: 25
   }],
 
   onComplete: function () {

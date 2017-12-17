@@ -1,5 +1,6 @@
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 let AllureReporter = require('jasmine-allure-reporter');
+const PixDiff = require('pix-diff');
 
 exports.config = {
   // seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -10,6 +11,17 @@ exports.config = {
       shardTestFiles: true
     }],
   //specs: ['../test/temp/login.js'],
+  onPrepare: () => {
+    const PixDiff = require('pix-diff');
+    browser.pixDiff = new PixDiff(
+        {
+            basePath: 'path/to/baseline/',
+            diffPath: 'path/to/diff/',
+            width: 1366,
+            height: 768
+        }
+    );
+},
   onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
@@ -20,6 +32,12 @@ exports.config = {
     jasmine.getEnv().addReporter(new AllureReporter({
       resultsDir: 'allure-results'
     }));
+    browser.pixDiff = new PixDiff({
+            basePath: 'path/to/baseline/',
+            diffPath: 'path/to/diff/',
+            width: 1366,
+            height: 768
+        });
   },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 123000,
