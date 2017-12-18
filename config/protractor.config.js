@@ -11,17 +11,6 @@ exports.config = {
       shardTestFiles: true
     }],
   //specs: ['../test/temp/login.js'],
-  onPrepare: () => {
-    const PixDiff = require('pix-diff');
-    browser.pixDiff = new PixDiff(
-        {
-            basePath: 'path/to/baseline/',
-            diffPath: 'path/to/diff/',
-            width: 1366,
-            height: 768
-        }
-    );
-},
   onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
@@ -32,12 +21,16 @@ exports.config = {
     jasmine.getEnv().addReporter(new AllureReporter({
       resultsDir: 'allure-results'
     }));
-    browser.pixDiff = new PixDiff({
-            basePath: 'path/to/baseline/',
-            diffPath: 'path/to/diff/',
-            width: 1366,
-            height: 768
-        });
+    // PixDiff.loadMatchers();
+    return browser.getCapabilities().then((capabilities) => {
+      const platformName = process.env.PLATFORM || capabilities.get('platformName') || capabilities.get('platform');
+
+      browser.pixDiff = new PixDiff({
+        basePath: 'test/resources/pixdiff/baseline/',
+        diffPath: 'test/resources/pixdiff/diff/',
+        formatImageName: `{tag}-{browserName}-${platformName}-{width}x{height}`
+      });
+    });
   },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 123000,

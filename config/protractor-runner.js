@@ -16,7 +16,7 @@ const setUp = async () => {
     sauceConnectLauncher({
       username: process.env.SAUCE_USERNAME,
       accessKey: process.env.SAUCE_ACCESS_KEY,
-      // tunnelIdentifier: tunnelName,
+      tunnelIdentifier: 'demo',
       verbose: true,
       verboseDebugging: true,
       logger: console.log,

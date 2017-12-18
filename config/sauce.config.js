@@ -81,6 +81,7 @@ exports.config = {
 
   multiCapabilities: [{
       browserName: 'firefox',
+      'tunnel-identifier': 'demo',
       version: 'latest',
       platform: 'OS X 10.10',
       name: "firefox-tests",
@@ -88,6 +89,7 @@ exports.config = {
       maxInstances: 25
   }, {
       browserName: 'chrome',
+      'tunnel-identifier': 'demo',
       version: '41',
       platform: 'Windows 7',
       name: "chrome-tests",
@@ -95,6 +97,7 @@ exports.config = {
       maxInstances: 25
   },{
     browserName: 'internet explorer',
+    'tunnel-identifier': 'demo',
     version: '11.0',
     platform: 'Windows 7',
     name: "ie-tests",
