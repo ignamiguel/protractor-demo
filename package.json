@@ -4,7 +4,8 @@
   "description": "Demo project for Protractor framework",
   "scripts": {
     "pretest": "webdriver-manager update",
-    "test": "node ./config/protractor-runner.js",
+    "test": "protractor config/sauce.config.js",
+    "test:runner": "node ./config/protractor-runner.js",
     "prereport": "rm -rf allure-report",
     "report": "allure generate allure-results -o allure-report && allure open allure-report",
     "clean": "rm -rf allure-report allure-results"
@@ -30,6 +31,7 @@
   "dependencies": {
     "cli-color": "^1.2.0",
     "jasmine-allure-reporter": "^1.0.1",
+    "log4js": "^2.4.1",
     "pix-diff": "^2.0.1",
     "protractor": "^5.1.2",
     "sauce-connect-launcher": "^1.2.3",
