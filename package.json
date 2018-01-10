@@ -4,7 +4,8 @@
   "description": "Demo project for Protractor framework",
   "scripts": {
     "pretest": "webdriver-manager update",
-    "test": "protractor config/sauce.config.js",
+    "test": "protractor config/protractor.config.js",
+    "test:sauce": "protractor config/sauce.config.js",
     "test:runner": "node ./config/protractor-runner.js",
     "prereport": "rm -rf allure-report",
     "report": "allure generate allure-results -o allure-report && allure open allure-report",

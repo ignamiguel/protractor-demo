@@ -13,7 +13,7 @@ describe('"the-internet" Protractor DEMO', ()=> {
   it('should navigate to login page', () => {
     browser.get('http://localhost:9292/login');
     browser.wait(EC.presenceOf(headerLabel));
-
+    browser.mozartTest = { name: 'login-error' };
     expect(headerLabel.getText()).toBe('Login Page');
   }, timeout);
 

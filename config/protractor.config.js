@@ -1,10 +1,26 @@
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 let AllureReporter = require('jasmine-allure-reporter');
 const PixDiff = require('pix-diff');
+const log4js = require('log4js');
 const chromeArgs =
   process.env.HEADLESS === "true"
     ? ["disable-infobars=true", "--headless", "--disable-gpu", "--window-size=1920x1080"]
     : ["disable-infobars=true"];
+
+const setLogger = () => {
+  log4js.configure({
+    appenders: {
+      loginOk: { type: 'file', filename: 'loginOk.log' },
+      loginError: { type: 'file', filename: 'loginError.log' },
+      console: { type: 'console' }
+    },
+    categories: {
+      loginOK: { appenders: ['loginOk'], level: 'info' },
+      loginError: { appenders: ['loginError'], level: 'trace' },
+      default: { appenders: ['console'], level: 'trace' }
+    }
+  });
+};
 
 exports.config = {
   // seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -17,6 +33,7 @@ exports.config = {
   //specs: ['../test/temp/login.js'],
   framework: 'jasmine2',
   onPrepare: function () {
+    setLogger();
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
         displayStacktrace: true
