@@ -1,5 +1,6 @@
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 let AllureReporter = require('jasmine-allure-reporter');
+const ScreenshotReporter = require('./reporters/screenshot-reporter');
 const PixDiff = require('pix-diff');
 const log4js = require('log4js');
 const chromeArgs =
@@ -43,6 +44,7 @@ exports.config = {
     jasmine.getEnv().addReporter(new AllureReporter({
       resultsDir: 'allure-results'
     }));
+    jasmine.getEnv().addReporter(new ScreenshotReporter());
     PixDiff.loadMatchers();
     return browser.getCapabilities().then((capabilities) => {
       const platformName = process.env.PLATFORM || capabilities.get('platformName') || capabilities.get('platform');

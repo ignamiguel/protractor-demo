@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Demo project for Protractor framework",
   "scripts": {
-    "pretest": "webdriver-manager update",
+    "skip_pretest": "webdriver-manager update",
     "test": "protractor config/protractor.config.js",
     "test:sauce": "protractor config/sauce.config.js",
     "test:runner": "node ./config/protractor-runner.js",
