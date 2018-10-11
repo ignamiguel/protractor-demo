@@ -1,2 +1,2 @@
 # protractor-demo
-Protractor DMEO
+Protractor DEMO
